@@ -12,7 +12,14 @@ build () {
     cd build
     cmake ..
     make
+    make_rc=$?
     cd ../..
+
+
+    if [ $make_rc -ne 0 ]; then
+        echo "Compilation failed! Aborting!"
+        exit $make_rc
+    fi
 }
 
 run () {
@@ -20,10 +27,13 @@ run () {
 
     if [[ "$*" == *"-store" ]]; then
         ./$1 > ../results.csv
+        cd ..
+        echo "Results stored in `pwd`/results.csv"
+        cd ..
     else
         ./$1
+        cd ../..
     fi
-    cd ../..
 }
 
 
@@ -35,10 +45,14 @@ store_flag=false
 
 for arg in "$@"; do
     case $arg in
-        -build) build_flag=true ;;
-        -run) run_flag=true ;;
-        -clean) clean_flag=true ;;
-        -store) store_flag=true ;;
+        --build) build_flag=true ;;
+        -b) build_flag=true ;;
+        --run) run_flag=true ;;
+        -r) run_flag=true ;;
+        --clean) clean_flag=true ;;
+        -c) clean_flag=true ;;
+        --store) store_flag=true ;;
+        -s) store_flag=true ;;
     esac
 done
 

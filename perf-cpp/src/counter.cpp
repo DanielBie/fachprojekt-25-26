@@ -64,7 +64,7 @@ perf::CounterResult::to_csv(const char delimiter, const bool print_header, const
     csv_stream << "counter" << delimiter << "value\n";
     if(additional.size() != 0){
       csv_stream.seekp(-1,csv_stream.cur);
-      csv_stream << delimiter << "additional\n";
+      csv_stream << delimiter << "type\n";
     }
   }
 

@@ -14,7 +14,7 @@ input_file = sys.argv[1]
 data = pd.read_csv(input_file)
 
 
-sns.barplot(x='counter', y='value', hue='additional', data=data)
+sns.barplot(x='counter', y='value', hue='type', data=data)
 
 # Add labels and title
 plt.xlabel('Counter')

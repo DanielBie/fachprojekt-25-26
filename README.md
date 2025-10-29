@@ -8,12 +8,12 @@ The `run.sh` script is used to both build and run. The first argument to the scr
 ```console
 ./run.sh initial
 ```
-To build the benchmark the flag `-build` is used. An additional flag `-clean` can be used to first clean the build folder and rebuild everything. This can be a useful first step in debugging. E.g. when building `initial` without a clean build the call would be
+To build the benchmark the flag `--build` (`-b`) is used. An additional flag `--clean` (`-c`) can be used to first clean the build folder and rebuild everything. This can be a useful first step in debugging. E.g. when building `initial` without a clean build the call would be
 ```console
 ./run.sh initial -build
 ```
 
-To run a benchmark the flag `-run` is used. Per default the results printed to the terminal. If the results should instead be stored in a `result.csv` file in the benchmark folder, the flag `-store` can be used. All flags can be combined. E.g. first clean building and then running the benchmark without storing to the file, the call is
+To run a benchmark the flag `--run` (`-r`) is used. Per default the results printed to the terminal. If the results should instead be stored in a `result.csv` file in the benchmark folder, the flag `--store` (`-s`) can be used. All flags can be combined. E.g. first clean building and then running the benchmark without storing to the file, the call is
 ```console
 ./run.sh initial -build -clean -run 
 ```
