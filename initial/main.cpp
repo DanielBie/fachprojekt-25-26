@@ -24,13 +24,20 @@ std::string benchmark(bool baseline, uint32_t iterations){
     std::unique_ptr<Matrix> c(new Matrix());
     init(*c);
 
+    std::vector<int> numbers(CACHE_FLUSH_SIZE);
+
     auto counter_definitions = perf::CounterDefinition{};
 
     auto event_counter = perf::EventCounter{counter_definitions};
     try {
-        event_counter.add({"instructions", "cycles", "cache-misses", "cache-references", "L1-dcache-loads", "L1-dcache-load-misses", "dTLB-loads", "dTLB-load-misses"});
+        event_counter.add({"instructions", "cycles", "cache-misses", "cache-references"});
     } catch (std::runtime_error &e) {
         std::cerr << e.what() << std::endl;
+    }
+
+    // flush cache
+    for(uint32_t i=0; i<CACHE_FLUSH_SIZE; ++i){
+        numbers.at(i)++;
     }
 
     try {
