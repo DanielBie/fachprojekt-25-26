@@ -12,7 +12,11 @@ uint32_t filtered_bonus(uint32_t &bonus) {
 }
 
 int baseline_bonus_error(uint32_t *allBonuses, const uint32_t *wrongBonus, size_t wrongBonusSize) {
-    return 0;
+    uint64_t sum = 0;
+    for (size_t i = 0; i < wrongBonusSize; ++i) {
+        sum += filtered_bonus(allBonuses[wrongBonus[i]]);
+    }
+    return sum;
 }
 
 int soft_prefetch_bonus_error(uint32_t *allBonuses, const uint32_t *wrongBonus, size_t wrongBonusSize) {
