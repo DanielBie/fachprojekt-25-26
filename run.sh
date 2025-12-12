@@ -54,6 +54,17 @@ for arg in "$@"; do
         --store) store_flag=true ;;
         -s) store_flag=true ;;
     esac
+    if [[ "$arg" == -* && "$arg" != --* && "${#arg}" -gt 2 ]]; then
+        for ((i=1; i<${#arg}; i++)); do
+            case "${arg:i:1}" in
+                b) build_flag=true ;;
+                r) run_flag=true ;;
+                c) clean_flag=true ;;
+                s) store_flag=true ;;
+                *) echo "Unknown short flag: -${arg:i:1}"; exit 1 ;;
+            esac
+        done
+    fi
 done
 
 if $build_flag; then
